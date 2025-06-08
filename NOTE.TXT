@@ -1,0 +1,35 @@
+1. Chạy chương trình: 
+    a. npm run dev: Kích hoạt một máy chủ phát triển (development server) cho phần frontend của ứng dụng.
+    - Mở CMD với quyền administrator
+    - cd C:\xampp\htdocs\dti-management-system
+    - npm run dev
+    b. php artisan serve: Lệnh của Laravel Artisan dùng để khởi động một máy chủ web cục bộ tích hợp sẵn của PHP.
+    - Mở CMD với quyền administrator
+    - cd C:\xampp\htdocs\dti-management-system
+    - Khởi tạo môi trường ảo: php artisan serve
+
+2. GitHub
+    hoangthang1110@gmail.com/hoangthang1110/Thang@2025
+
+    Các lệnh cơ bản để quản lý dự án sau này:
+    Sau khi bạn đã thiết lập và đẩy commit đầu tiên, việc quản lý dự án sẽ trở nên đơn giản hơn:
+    Khi bạn thực hiện thay đổi mới trong code của mình:
+    a. Thêm các tệp đã thay đổi vào staging area: git add .
+    b. Tạo một commit với thông báo ý nghĩa:    git commit -m "Mô tả ngắn gọn về các thay đổi của bạn"
+    c. Đẩy commit đó lên GitHub: git push
+    (Vì bạn đã dùng -u origin main ở lần đẩy đầu tiên, bây giờ bạn chỉ cần git push)
+    
+    Khi bạn muốn lấy các thay đổi từ GitHub (nếu có người khác làm việc trên cùng dự án hoặc bạn làm việc trên nhiều máy tính):
+        git pull
+
+3. Xóa Cache Laravel và Khởi động lại Server:
+    Mở Terminal/Command Prompt trong thư mục gốc của dự án (C:\xampp\htdocs\dti-management-system).
+    php artisan optimize:clear
+    php artisan view:clear
+    php artisan route:clear
+    php artisan serve
+
+    -Biên dịch lại asset front-end:
+        npm install # Chạy lại để đảm bảo tất cả dependencies đều được cài đặt
+        npm run dev  # RẤT QUAN TRỌNG! Đảm bảo không có lỗi nào ở đây.
+    - Khởi động lại server Laravel: php artisan serve

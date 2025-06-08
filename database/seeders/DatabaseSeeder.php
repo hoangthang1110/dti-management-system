@@ -20,5 +20,12 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+        
+        // \App\Models\User::factory(10)->create(); // Nếu bạn muốn tạo thêm người dùng ngẫu nhiên
+        // Gọi các seeder khác của bạn
+        $this->call([
+            RoleAndPermissionSeeder::class, // <-- ĐẢM BẢO DÒNG NÀY CÓ Ở ĐÂY
+            // Thêm các seeder khác nếu có
+        ]);
     }
 }

@@ -1,27 +1,27 @@
-@props([
-    'name',
-    'show' => false,
-    'maxWidth' => '2xl'
-])
+@props(['name', 'show' => false, 'maxWidth' => '2xl'])
 
 @php
-$maxWidth = [
-    'sm' => 'sm:max-w-sm',
-    'md' => 'sm:max-w-md',
-    'lg' => 'sm:max-w-lg',
-    'xl' => 'sm:max-w-xl',
-    '2xl' => 'sm:max-w-2xl',
-][$maxWidth];
+    $maxWidth = [
+        'sm' => 'sm:max-w-sm',
+        'md' => 'sm:max-w-md',
+        'lg' => 'sm:max-w-lg',
+        'xl' => 'sm:max-w-xl',
+        '2xl' => 'sm:max-w-2xl',
+        '3xl' => 'sm:max-w-3xl',
+        '4xl' => 'sm:max-w-4xl',
+        '5xl' => 'sm:max-w-5xl',
+        'full' => 'sm:max-w-full',
+    ][$maxWidth];
 @endphp
 
 <div
     x-data="{
         show: @js($show),
         focusables() {
-            // All focusable element types...
+            // All focusable element types not disabled.
             let selector = 'a, button, input:not([type=\'hidden\']), textarea, select, details, [tabindex]:not([tabindex=\'-1\'])'
+
             return [...$el.querySelectorAll(selector)]
-                // All non-disabled elements...
                 .filter(el => ! el.hasAttribute('disabled'))
         },
         firstFocusable() { return this.focusables()[0] },
@@ -34,7 +34,6 @@ $maxWidth = [
     x-init="$watch('show', value => {
         if (value) {
             document.body.classList.add('overflow-y-hidden');
-            {{ $attributes->has('focusable') ? 'setTimeout(() => firstFocusable().focus(), 100)' : '' }}
         } else {
             document.body.classList.remove('overflow-y-hidden');
         }
@@ -42,10 +41,9 @@ $maxWidth = [
     x-on:open-modal.window="$event.detail == '{{ $name }}' ? show = true : null"
     x-on:close.stop="show = false"
     x-on:keydown.escape.window="show = false"
-    x-on:keydown.tab.prevent="$event.shiftKey || nextFocusable().focus()"
-    x-on:keydown.shift.tab.prevent="prevFocusable().focus()"
     x-show="show"
-    class="fixed inset-0 overflow-y-auto px-4 py-6 sm:px-0 z-50"
+    id="{{ $name }}"
+    class="fixed inset-0 z-50 overflow-y-auto"
     style="display: {{ $show ? 'block' : 'none' }};"
 >
     <div
